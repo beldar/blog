@@ -2,12 +2,12 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://yoursite.com
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+url: http://beldar.github.io/blog
+title: Transient Obsessions
+subtitle: A collection of a web developer ramblings
+author: Martí Planellas
 simple_search: https://www.google.com/search
-description:
+description: Thoughts, tutorials, reviews, explanations about web development 
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
@@ -16,7 +16,7 @@ description:
 date_format: "ordinal"
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
-subscribe_rss: /atom.xml
+subscribe_rss: /blog/atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
 email:
@@ -26,10 +26,10 @@ email:
 # ----------------------- #
 
 # If publishing to a subdirectory as in http://site.com/project set 'root: /project'
-root: /
-permalink: /blog/:year/:month/:day/:title/
+root: /blog
+permalink: /blog/:day/:month/:year/:title/
 source: source
-destination: public
+destination: public/blog
 plugins: plugins
 code_dir: downloads/code
 category_dir: blog/categories
@@ -63,13 +63,13 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.
 # ----------------------- #
 
 # Github repositories
-github_user:
-github_repo_count: 0
+github_user: beldar
+github_repo_count: 10
 github_show_profile_link: true
 github_skip_forks: true
 
 # Twitter
-twitter_user:
+twitter_user: beldar
 twitter_tweet_button: true
 
 # Google +1

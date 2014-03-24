@@ -1,0 +1,28 @@
+html {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAUElEQVQYV2Pcvn3vfwY08OfPX3QhBkZiFLKzsxFWCFIEAnhNhCnCqxBZEVjh5s27MDzDysqC6Rl0hSCT/v37h18hzDq8CpHdhFMhusOxKQQAZeY612HhR/wAAAAASUVORK5CYII=) repeat;
+}
+
+body {
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.3);
+}
+
+header[role=banner] {
+  position: relative;
+  height: 318px;
+  background: url("../images/header.jpg") no-repeat center center !important;
+  background-attachment: fixed;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+header[role=banner] hgroup {
+  bottom: 2em;
+  position: absolute;
+  text-shadow: 4px 2px 4px rgba(0, 0, 0, 0.7);
+}
+header[role=banner] hgroup h2 {
+  color: white;
+}
+
+body > nav, body > footer {
+  background: rgba(204, 204, 204, 0.6) !important;
+}
