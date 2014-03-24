@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+    <url>
+        <loc>http://beldar.github.io/blog/blog/24/03/2014/yet-another-blog/</loc>
+        <lastmod>2014-03-24T12:13:43+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://beldar.github.io/blog/about/</loc>
+        <lastmod>2014-03-24T12:58:50+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://beldar.github.io/blog/blog/archives/</loc>
+        <lastmod>2014-03-24T12:13:43+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://beldar.github.io/blog/</loc>
+        <lastmod>2014-03-24T12:13:43+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://beldar.github.io/blog/robots.txt</loc>
+        <lastmod>2014-03-24T11:16:43+00:00</lastmod>
+    </url>
+</urlset>
