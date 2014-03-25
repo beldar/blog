@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Transient Obsessions</title>
+  <title>Web Components - Transient Obsessions</title>
   <meta name="author" content="Martí Planellas">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.martiplanellas.info/blog">
+  <link rel="canonical" href="http://www.martiplanellas.info/blog/blog/25/03/2014/web-components">
   <link href="/blog/favicon.png" rel="icon">
   <link href="/blog/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="http://feeds.feedburner.com/TransientObsessions" rel="alternate" title="Transient Obsessions" type="application/atom+xml">
@@ -75,15 +75,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/blog/25/03/2014/web-components/">Web Components</a></h1>
+      <h1 class="entry-title">Web Components</h1>
     
     
       <p class="meta">
@@ -101,15 +98,15 @@
 
 <time datetime="2014-03-25T16:56:32+00:00" pubdate data-updated="true">Mar 25<span>th</span>, 2014</time>
         
-           | <a href="/blog/blog/25/03/2014/web-components/#disqus_thread"
-             data-disqus-identifier="http://www.martiplanellas.info/blog/blog/25/03/2014/web-components/">Comments</a>
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://www.martiplanellas.info/blog">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Web Components had become my latest obsession, I read about them a long time ago, but it wasn&rsquo;t until the major players on the web arena embraced them that I really saw them as something I could use today.</p>
+<div class="entry-content"><p>Web Components had become my latest obsession, I read about them a long time ago, but it wasn&rsquo;t until the major players on the web arena embraced them that I really saw them as something I could use today.</p>
 
 <p>When I say major players I mean Mozilla and Google, both of them started writing javascript libraries that provide <a href="http://en.wikipedia.org/wiki/Polyfill">polyfills</a> for the features needed to make web components work today.</p>
 
@@ -148,125 +145,16 @@
 
 <p>In a future post I&rsquo;ll explain how I did it, what challenges did I face and some advises too.</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/blog/24/03/2014/the-yeoman-workflow/">The Yeoman Workflow</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Martí Planellas</span></span>
 
-<time datetime="2014-03-24T14:39:04+00:00" pubdate data-updated="true">Mar 24<span>th</span>, 2014</time>
-        
-           | <a href="/blog/blog/24/03/2014/the-yeoman-workflow/#disqus_thread"
-             data-disqus-identifier="http://www.martiplanellas.info/blog/blog/24/03/2014/the-yeoman-workflow/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Searching for tools</h2>
-
-<p>I&rsquo;ve been searching and trying new workflows when starting a front end project/project phase, there are a lot of interesting open source projects for rapid prototyping &lsquo;static&rsquo; websites in a reusable, collaborative, optimised and intelligent way.</p>
-
-<p>I&rsquo;ve been trying tools like:</p>
-
-<ul>
-<li><a href="http://gruntjs.com/">Grunt</a> for automating build tasks like optimising images, minifying and uglifying javascript, css and html.</li>
-<li><a href="http://bower.io/">Bower</a> a package manager for the web (meaning front end).</li>
-<li><a href="http://compass-style.org/">Compass</a> I know it can do a lot of things but I&rsquo;m using it only to compile <a href="http://sass-lang.com/">Sass</a> files.</li>
-</ul>
-
-
-<p>But it wasn&rsquo;t until I found <a href="http://yeoman.io/">Yeoman</a> that everything came toghether.</p>
-
-<p>It&rsquo;s a tool that scaffolds, downloads and prepares all these tools for you doing the tedious configuration part and using best practices approach in all parts.</p>
-
-<h2>Instalation</h2>
-
-<p> If you have node already you just have to run:</p>
-
-<pre><code>npm install -g yo
-</code></pre>
-
-<p>Yeoman has lots of generators which basically are different scaffold variations using different libraries and components depending on which tools you need for the project.</p>
-
-<p>The basic one is called <a href="https://github.com/yeoman/generator-webapp">generator-webapp</a> you can install it running:</p>
-
-<pre><code>npm install -g generator-webapp
-</code></pre>
-
-<p>An then create a new project like this:</p>
-
-<pre><code>yo webapp
-</code></pre>
-
-<p>It will ask you if you if you want some additional things:</p>
-
-<p><img src="https://camo.githubusercontent.com/5f126a73cb4f0a16ca7b9e9c7b748a099458089b/687474703a2f2f692e696d6775722e636f6d2f754b545432486a2e706e67" alt="webapp-generator" /></p>
-
-<p>And BOOM, you have a project structure ready to build using grunt, you can create a web server on the fly running <code>grunt serve</code> or build the project into the <code>/dist</code> folder running <code>grunt build</code>.</p>
-
-<p>Then you can use bower to install other js libraries you need like:</p>
-
-<pre><code>bower install --save underscore
-</code></pre>
-
-<p>The <code>--save</code> parameter ensures that the new library is saved on the <code>bower.json</code> file.</p>
-
-<p>All your bower dependencies will end up in the <code>bower_components</code> folder which is not version controlled, when you want to install it somewhere else you&rsquo;ll run <code>bower install</code> inside and it will download all the libraries you need, just as <a href="https://getcomposer.org/">Composer</a> does for the back end.</p>
-
-<h2>Using other generators</h2>
-
-<p>That&rsquo;s one way of doing it, another way is to use other generators that are more specific to what you&rsquo;ll use in your project, for example I usually use <a href="http://backbonejs.org/">Backbone.js</a> in my projects, I could install it via bower, or I could use the <a href="https://github.com/yeoman/generator-backbone">generator-backbone</a>, which also gives me other interesting tools when building my app like generate models, collections, routers or views:</p>
-
-<pre><code>yo backbone # generates your application base and build workflow
-yo backbone:model blog
-yo backbone:collection blog
-yo backbone:router blog
-yo backbone:view blog
-</code></pre>
-
-<p>There&rsquo;s a very thorough and extensive post about how to use it in <a href="http://code.tutsplus.com/tutorials/building-apps-with-the-yeoman-workflow--net-33254">NetTuts</a></p>
-
-<p>There&rsquo;re quite a few <a href="http://yeoman.io/official-generators.html">official generators</a> and tons of <a href="http://yeoman.io/community-generators.html">community generators</a>, you can even <a href="http://yeoman.io/generators.html#writing-your-first-generator">write your own</a> with your own specifications.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/blog/24/03/2014/yet-another-blog/">Yet Another Blog</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -278,41 +166,46 @@ yo backbone:view blog
   
 
 
-<time datetime="2014-03-24T11:26:30+00:00" pubdate data-updated="true">Mar 24<span>th</span>, 2014</time>
-        
-           | <a href="/blog/blog/24/03/2014/yet-another-blog/#disqus_thread"
-             data-disqus-identifier="http://www.martiplanellas.info/blog/blog/24/03/2014/yet-another-blog/">Comments</a>
-        
-      </p>
+<time datetime="2014-03-25T16:56:32+00:00" pubdate data-updated="true">Mar 25<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/blog/categories/css/'>css</a>, <a class='category' href='/blog/blog/categories/frontend/'>frontend</a>, <a class='category' href='/blog/blog/categories/html/'>html</a>, <a class='category' href='/blog/blog/categories/js/'>js</a>, <a class='category' href='/blog/blog/categories/polymer/'>polymer</a>, <a class='category' href='/blog/blog/categories/web-components/'>web components</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><h2>Hello World!</h2>
-
-<p>I&rsquo;ve lost the count on how many blogs I started and abandoned, and I always tell myself,
-&ldquo;this is going to be the one, I&rsquo;m gonna crush it with this one&rdquo;, and the farthest I get is 10 posts or less.
-This is because I normaly enjoy more setting up, designing, customizing the blog than actually writing on it.</p>
-
-<p>But hey, <strong>this one is going to be different</strong>, I&rsquo;m gonna crush it with this one!</p>
-
-<p>I will honestly try to put in here the things I learn and use in a daily basis, new technologies, techniques and
-stuff that obsesses me for a briefly amount of time.</p>
-
-<p>This blog is being served from Github using Jekyll and Octopress.</p>
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.martiplanellas.info/blog/blog/25/03/2014/web-components/" data-via="beldar" data-counturl="http://www.martiplanellas.info/blog/blog/25/03/2014/web-components/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/blog/24/03/2014/the-yeoman-workflow/" title="Previous Post: The Yeoman Workflow">&laquo; The Yeoman Workflow</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/blog/archives">Blog Archives</a>
-    
-  </div>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
+  </section>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -337,7 +230,7 @@ stuff that obsesses me for a briefly amount of time.</p>
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/beldar">@beldar</a> on GitHub
@@ -370,6 +263,7 @@ stuff that obsesses me for a briefly amount of time.</p>
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -384,7 +278,10 @@ stuff that obsesses me for a briefly amount of time.</p>
       var disqus_shortname = 'TransientObsessions';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.martiplanellas.info/blog/blog/25/03/2014/web-components/';
+        var disqus_url = 'http://www.martiplanellas.info/blog/blog/25/03/2014/web-components/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
