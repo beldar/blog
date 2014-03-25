@@ -16,7 +16,7 @@ description: Thoughts, tutorials, reviews, explanations about web development
 date_format: "ordinal"
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
-subscribe_rss: /blog/atom.xml
+subscribe_rss: http://feeds.feedburner.com/TransientObsessions
 subscribe_email:
 # RSS feeds can list your email address if you like
 email:
@@ -64,7 +64,7 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.
 
 # Github repositories
 github_user: beldar
-github_repo_count: 10
+github_repo_count: 5
 github_show_profile_link: true
 github_skip_forks: true
 
@@ -94,7 +94,7 @@ disqus_short_name:
 disqus_show_comment_count: false
 
 # Google Analytics
-google_analytics_tracking_id:
+google_analytics_tracking_id: UA-49230976-2
 
 # Facebook Like
-facebook_like: false
+facebook_like: true
