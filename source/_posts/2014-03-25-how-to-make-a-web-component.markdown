@@ -10,6 +10,8 @@ Web Components had become my latest obsession, I read about them a long time ago
 
 When I say major players I mean Mozilla and Google, both of them started writing javascript libraries that provide [polyfills](http://en.wikipedia.org/wiki/Polyfill) for the features needed to make web components work today.
 
+<!-- more -->
+
 Ok, but what are web components? In words of Zeno Rocha, project lead of [customelements.io](http://customelements.io/):
 
 > Web Components are a collection of standards which are working their way through the W3C. They enable truly encapsulated and reusable components for the web. And if you think HTML5 changed the web, wait to see what Web Components will do.

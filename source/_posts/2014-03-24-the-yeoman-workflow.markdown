@@ -20,6 +20,8 @@ But it wasn't until I found [Yeoman](http://yeoman.io/) that everything came tog
 
 It's a tool that scaffolds, downloads and prepares all these tools for you doing the tedious configuration part and using best practices approach in all parts. 
 
+<!-- more -->
+
 ## Instalation
 
  If you have node already you just have to run:
