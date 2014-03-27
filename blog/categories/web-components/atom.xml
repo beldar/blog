@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Web Components | Transient Obsessions]]></title>
   <link href="http://www.martiplanellas.info/blog/blog/categories/web-components/atom.xml" rel="self"/>
   <link href="http://www.martiplanellas.info/blog/"/>
-  <updated>2014-03-27T17:26:00+00:00</updated>
+  <updated>2014-03-27T17:28:00+00:00</updated>
   <id>http://www.martiplanellas.info/blog/</id>
   <author>
     <name><![CDATA[Martí Planellas]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>Web Components had become my latest obsession, I read about them a long time ago, but it wasn&rsquo;t until the major players on the web arena embraced them that I really saw them as something I could use today.</p>
 
 <p>When I say major players I mean Mozilla and Google, both of them started writing javascript libraries that provide <a href="http://en.wikipedia.org/wiki/Polyfill">polyfills</a> for the features needed to make web components work today.</p>
+
+<!-- more -->
+
 
 <p>Ok, but what are web components? In words of Zeno Rocha, project lead of <a href="http://customelements.io/">customelements.io</a>:</p>
 

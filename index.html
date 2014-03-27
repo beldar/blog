@@ -113,42 +113,12 @@
 
 <p>When I say major players I mean Mozilla and Google, both of them started writing javascript libraries that provide <a href="http://en.wikipedia.org/wiki/Polyfill">polyfills</a> for the features needed to make web components work today.</p>
 
-<p>Ok, but what are web components? In words of Zeno Rocha, project lead of <a href="http://customelements.io/">customelements.io</a>:</p>
-
-<blockquote><p>Web Components are a collection of standards which are working their way through the W3C. They enable truly encapsulated and reusable components for the web. And if you think HTML5 changed the web, wait to see what Web Components will do.</p></blockquote>
-
-<p>Those standards working their way through the future are:</p>
-
-<ul>
-<li><strong>Custom Elements</strong>: Enables authors to define and use new types of DOM elements in a document.</li>
-<li><strong>Shadow DOM</strong>: Shadow DOM is designed to provide encapsulation by hiding DOM subtrees under shadow roots. It provides a method of establishing and maintaining functional boundaries between DOM trees and how these trees interact with each other within a document, thus enabling better functional encapsulation within the DOM.</li>
-<li><strong>HTML Imports</strong>: HTML Imports are a way to include and reuse HTML documents in other HTML documents.</li>
-</ul>
-
-
-<p>These are the foundation of web components.</p>
-
-<p>Mozilla is developing <a href="http://www.x-tags.org/">x-tags</a> library and Google is developing the <a href="http://www.polymer-project.org/">Polymer</a> library, both of them have their own way of declaring the component and the interface, but the end result is the same:</p>
-
-<pre><code>&lt;some-component&gt;&lt;/some-component&gt;
-</code></pre>
-
-<p>A new element that has an encapsulated structure, style and functionality; it&rsquo;s highly reusable, and customisable through attributes and maybe a javascript API.</p>
-
-<p>In <a href="http://customelements.io/">customelements.io</a> you can find a directory of web components ready to use, most of them also can be installed via bower, and they&rsquo;re really fun to use.</p>
-
-<p>I&rsquo;ve created three web components so far:</p>
-
-<ul>
-<li><a href="https://github.com/beldar/boris-bikes">boris-bikes</a>: It provides a component that fetches the <a href="http://www.tfl.gov.uk/modes/cycling/barclays-cycle-hire">Boris Bike</a> data (free bikes, free docks, etc) and provides and interface for it, getting your location and showing the bikes location on a map (which is another web component).</li>
-<li><a href="https://github.com/beldar/tfl-status">tfl-status</a>: It provides a component that fetches the Tube Status updates and shows the line status in real time.</li>
-<li><a href="https://github.com/beldar/display-rss">display-rss</a>: Displays any RSS feed that you put on the <em>url</em> attribute</li>
-</ul>
-
-
-<p>In a future post I&rsquo;ll explain how I did it, what challenges did I face and some advises too.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/25/03/2014/web-components/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -202,56 +172,12 @@
 
 <p>It&rsquo;s a tool that scaffolds, downloads and prepares all these tools for you doing the tedious configuration part and using best practices approach in all parts.</p>
 
-<h2>Instalation</h2>
-
-<p> If you have node already you just have to run:</p>
-
-<pre><code>npm install -g yo
-</code></pre>
-
-<p>Yeoman has lots of generators which basically are different scaffold variations using different libraries and components depending on which tools you need for the project.</p>
-
-<p>The basic one is called <a href="https://github.com/yeoman/generator-webapp">generator-webapp</a> you can install it running:</p>
-
-<pre><code>npm install -g generator-webapp
-</code></pre>
-
-<p>An then create a new project like this:</p>
-
-<pre><code>yo webapp
-</code></pre>
-
-<p>It will ask you if you if you want some additional things:</p>
-
-<p><img src="https://camo.githubusercontent.com/5f126a73cb4f0a16ca7b9e9c7b748a099458089b/687474703a2f2f692e696d6775722e636f6d2f754b545432486a2e706e67" alt="webapp-generator" /></p>
-
-<p>And BOOM, you have a project structure ready to build using grunt, you can create a web server on the fly running <code>grunt serve</code> or build the project into the <code>/dist</code> folder running <code>grunt build</code>.</p>
-
-<p>Then you can use bower to install other js libraries you need like:</p>
-
-<pre><code>bower install --save underscore
-</code></pre>
-
-<p>The <code>--save</code> parameter ensures that the new library is saved on the <code>bower.json</code> file.</p>
-
-<p>All your bower dependencies will end up in the <code>bower_components</code> folder which is not version controlled, when you want to install it somewhere else you&rsquo;ll run <code>bower install</code> inside and it will download all the libraries you need, just as <a href="https://getcomposer.org/">Composer</a> does for the back end.</p>
-
-<h2>Using other generators</h2>
-
-<p>That&rsquo;s one way of doing it, another way is to use other generators that are more specific to what you&rsquo;ll use in your project, for example I usually use <a href="http://backbonejs.org/">Backbone.js</a> in my projects, I could install it via bower, or I could use the <a href="https://github.com/yeoman/generator-backbone">generator-backbone</a>, which also gives me other interesting tools when building my app like generate models, collections, routers or views:</p>
-
-<pre><code>yo backbone # generates your application base and build workflow
-yo backbone:model blog
-yo backbone:collection blog
-yo backbone:router blog
-yo backbone:view blog
-</code></pre>
-
-<p>There&rsquo;s a very thorough and extensive post about how to use it in <a href="http://code.tutsplus.com/tutorials/building-apps-with-the-yeoman-workflow--net-33254">NetTuts</a></p>
-
-<p>There&rsquo;re quite a few <a href="http://yeoman.io/official-generators.html">official generators</a> and tons of <a href="http://yeoman.io/community-generators.html">community generators</a>, you can even <a href="http://yeoman.io/generators.html#writing-your-first-generator">write your own</a> with your own specifications.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/24/03/2014/the-yeoman-workflow/">Read on &rarr;</a>
+    </footer>
   
 
 

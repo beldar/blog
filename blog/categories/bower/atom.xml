@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bower | Transient Obsessions]]></title>
   <link href="http://www.martiplanellas.info/blog/blog/categories/bower/atom.xml" rel="self"/>
   <link href="http://www.martiplanellas.info/blog/"/>
-  <updated>2014-03-27T17:26:00+00:00</updated>
+  <updated>2014-03-27T17:28:00+00:00</updated>
   <id>http://www.martiplanellas.info/blog/</id>
   <author>
     <name><![CDATA[Martí Planellas]]></name>
@@ -34,6 +34,9 @@
 <p>But it wasn&rsquo;t until I found <a href="http://yeoman.io/">Yeoman</a> that everything came toghether.</p>
 
 <p>It&rsquo;s a tool that scaffolds, downloads and prepares all these tools for you doing the tedious configuration part and using best practices approach in all parts.</p>
+
+<!-- more -->
+
 
 <h2>Instalation</h2>
 
