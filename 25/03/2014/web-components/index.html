@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>The Yeoman Workflow - Transient Obsessions</title>
+  <title>Web Components - Transient Obsessions</title>
   <meta name="author" content="Martí Planellas">
 
   
-  <meta name="description" content="Searching for tools I&rsquo;ve been searching and trying new workflows when starting a front end project/project phase, there are a lot of &hellip;">
+  <meta name="description" content="Web Components had become my latest obsession, I read about them a long time ago, but it wasn&rsquo;t until the major players on the web arena &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.martiplanellas.info/blog/blog/24/03/2014/the-yeoman-workflow">
+  <link rel="canonical" href="http://www.martiplanellas.info/blog/25/03/2014/web-components">
   <link href="/blog/favicon.png" rel="icon">
   <link href="/blog/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="http://feeds.feedburner.com/TransientObsessions" rel="alternate" title="Transient Obsessions" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">The Yeoman Workflow</h1>
+      <h1 class="entry-title">Web Components</h1>
     
     
       <p class="meta">
@@ -96,7 +96,7 @@
   
 
 
-<time datetime="2014-03-24T14:39:04+00:00" pubdate data-updated="true">Mar 24<span>th</span>, 2014</time>
+<time datetime="2014-03-25T16:56:32+00:00" pubdate data-updated="true">Mar 25<span>th</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://www.martiplanellas.info/blog">Comments</a>
@@ -106,71 +106,44 @@
   </header>
 
 
-<div class="entry-content"><h2>Searching for tools</h2>
+<div class="entry-content"><p>Web Components had become my latest obsession, I read about them a long time ago, but it wasn&rsquo;t until the major players on the web arena embraced them that I really saw them as something I could use today.</p>
 
-<p>I&rsquo;ve been searching and trying new workflows when starting a front end project/project phase, there are a lot of interesting open source projects for rapid prototyping &lsquo;static&rsquo; websites in a reusable, collaborative, optimised and intelligent way.</p>
+<p>When I say major players I mean Mozilla and Google, both of them started writing javascript libraries that provide <a href="http://en.wikipedia.org/wiki/Polyfill">polyfills</a> for the features needed to make web components work today.</p>
 
-<p>I&rsquo;ve been trying tools like:</p>
+<p>Ok, but what are web components? In words of Zeno Rocha, project lead of <a href="http://customelements.io/">customelements.io</a>:</p>
+
+<blockquote><p>Web Components are a collection of standards which are working their way through the W3C. They enable truly encapsulated and reusable components for the web. And if you think HTML5 changed the web, wait to see what Web Components will do.</p></blockquote>
+
+<p>Those standards working their way through the future are:</p>
 
 <ul>
-<li><a href="http://gruntjs.com/">Grunt</a> for automating build tasks like optimising images, minifying and uglifying javascript, css and html.</li>
-<li><a href="http://bower.io/">Bower</a> a package manager for the web (meaning front end).</li>
-<li><a href="http://compass-style.org/">Compass</a> I know it can do a lot of things but I&rsquo;m using it only to compile <a href="http://sass-lang.com/">Sass</a> files.</li>
+<li><strong>Custom Elements</strong>: Enables authors to define and use new types of DOM elements in a document.</li>
+<li><strong>Shadow DOM</strong>: Shadow DOM is designed to provide encapsulation by hiding DOM subtrees under shadow roots. It provides a method of establishing and maintaining functional boundaries between DOM trees and how these trees interact with each other within a document, thus enabling better functional encapsulation within the DOM.</li>
+<li><strong>HTML Imports</strong>: HTML Imports are a way to include and reuse HTML documents in other HTML documents.</li>
 </ul>
 
 
-<p>But it wasn&rsquo;t until I found <a href="http://yeoman.io/">Yeoman</a> that everything came toghether.</p>
+<p>These are the foundation of web components.</p>
 
-<p>It&rsquo;s a tool that scaffolds, downloads and prepares all these tools for you doing the tedious configuration part and using best practices approach in all parts.</p>
+<p>Mozilla is developing <a href="http://www.x-tags.org/">x-tags</a> library and Google is developing the <a href="http://www.polymer-project.org/">Polymer</a> library, both of them have their own way of declaring the component and the interface, but the end result is the same:</p>
 
-<h2>Instalation</h2>
-
-<p> If you have node already you just have to run:</p>
-
-<pre><code>npm install -g yo
+<pre><code>&lt;some-component&gt;&lt;/some-component&gt;
 </code></pre>
 
-<p>Yeoman has lots of generators which basically are different scaffold variations using different libraries and components depending on which tools you need for the project.</p>
+<p>A new element that has an encapsulated structure, style and functionality; it&rsquo;s highly reusable, and customisable through attributes and maybe a javascript API.</p>
 
-<p>The basic one is called <a href="https://github.com/yeoman/generator-webapp">generator-webapp</a> you can install it running:</p>
+<p>In <a href="http://customelements.io/">customelements.io</a> you can find a directory of web components ready to use, most of them also can be installed via bower, and they&rsquo;re really fun to use.</p>
 
-<pre><code>npm install -g generator-webapp
-</code></pre>
+<p>I&rsquo;ve created three web components so far:</p>
 
-<p>An then create a new project like this:</p>
+<ul>
+<li><a href="https://github.com/beldar/boris-bikes">boris-bikes</a>: It provides a component that fetches the <a href="http://www.tfl.gov.uk/modes/cycling/barclays-cycle-hire">Boris Bike</a> data (free bikes, free docks, etc) and provides and interface for it, getting your location and showing the bikes location on a map (which is another web component).</li>
+<li><a href="https://github.com/beldar/tfl-status">tfl-status</a>: It provides a component that fetches the Tube Status updates and shows the line status in real time.</li>
+<li><a href="https://github.com/beldar/display-rss">display-rss</a>: Displays any RSS feed that you put on the <em>url</em> attribute</li>
+</ul>
 
-<pre><code>yo webapp
-</code></pre>
 
-<p>It will ask you if you if you want some additional things:</p>
-
-<p><img src="https://camo.githubusercontent.com/5f126a73cb4f0a16ca7b9e9c7b748a099458089b/687474703a2f2f692e696d6775722e636f6d2f754b545432486a2e706e67" alt="webapp-generator" /></p>
-
-<p>And BOOM, you have a project structure ready to build using grunt, you can create a web server on the fly running <code>grunt serve</code> or build the project into the <code>/dist</code> folder running <code>grunt build</code>.</p>
-
-<p>Then you can use bower to install other js libraries you need like:</p>
-
-<pre><code>bower install --save underscore
-</code></pre>
-
-<p>The <code>--save</code> parameter ensures that the new library is saved on the <code>bower.json</code> file.</p>
-
-<p>All your bower dependencies will end up in the <code>bower_components</code> folder which is not version controlled, when you want to install it somewhere else you&rsquo;ll run <code>bower install</code> inside and it will download all the libraries you need, just as <a href="https://getcomposer.org/">Composer</a> does for the back end.</p>
-
-<h2>Using other generators</h2>
-
-<p>That&rsquo;s one way of doing it, another way is to use other generators that are more specific to what you&rsquo;ll use in your project, for example I usually use <a href="http://backbonejs.org/">Backbone.js</a> in my projects, I could install it via bower, or I could use the <a href="https://github.com/yeoman/generator-backbone">generator-backbone</a>, which also gives me other interesting tools when building my app like generate models, collections, routers or views:</p>
-
-<pre><code>yo backbone # generates your application base and build workflow
-yo backbone:model blog
-yo backbone:collection blog
-yo backbone:router blog
-yo backbone:view blog
-</code></pre>
-
-<p>There&rsquo;s a very thorough and extensive post about how to use it in <a href="http://code.tutsplus.com/tutorials/building-apps-with-the-yeoman-workflow--net-33254">NetTuts</a></p>
-
-<p>There&rsquo;re quite a few <a href="http://yeoman.io/official-generators.html">official generators</a> and tons of <a href="http://yeoman.io/community-generators.html">community generators</a>, you can even <a href="http://yeoman.io/generators.html#writing-your-first-generator">write your own</a> with your own specifications.</p>
+<p>In a future post I&rsquo;ll explain how I did it, what challenges did I face and some advises too.</p>
 </div>
 
 
@@ -193,12 +166,12 @@ yo backbone:view blog
   
 
 
-<time datetime="2014-03-24T14:39:04+00:00" pubdate data-updated="true">Mar 24<span>th</span>, 2014</time>
+<time datetime="2014-03-25T16:56:32+00:00" pubdate data-updated="true">Mar 25<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/blog/categories/bower/'>bower</a>, <a class='category' href='/blog/blog/categories/css/'>css</a>, <a class='category' href='/blog/blog/categories/frontend/'>frontend</a>, <a class='category' href='/blog/blog/categories/grunt/'>grunt</a>, <a class='category' href='/blog/blog/categories/html/'>html</a>, <a class='category' href='/blog/blog/categories/js/'>js</a>, <a class='category' href='/blog/blog/categories/workflow/'>workflow</a>, <a class='category' href='/blog/blog/categories/yeoman/'>yeoman</a>
+    <a class='category' href='/blog/blog/categories/css/'>css</a>, <a class='category' href='/blog/blog/categories/frontend/'>frontend</a>, <a class='category' href='/blog/blog/categories/html/'>html</a>, <a class='category' href='/blog/blog/categories/js/'>js</a>, <a class='category' href='/blog/blog/categories/polymer/'>polymer</a>, <a class='category' href='/blog/blog/categories/web-components/'>web components</a>
   
 </span>
 
@@ -207,7 +180,7 @@ yo backbone:view blog
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.martiplanellas.info/blog/blog/24/03/2014/the-yeoman-workflow/" data-via="beldar" data-counturl="http://www.martiplanellas.info/blog/blog/24/03/2014/the-yeoman-workflow/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.martiplanellas.info/blog/25/03/2014/web-components/" data-via="beldar" data-counturl="http://www.martiplanellas.info/blog/25/03/2014/web-components/" >Tweet</a>
   
   
   
@@ -218,10 +191,8 @@ yo backbone:view blog
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/blog/24/03/2014/yet-another-blog/" title="Previous Post: Yet another blog">&laquo; Yet another blog</a>
+        <a class="basic-alignment left" href="/blog/24/03/2014/the-yeoman-workflow/" title="Previous Post: The Yeoman Workflow">&laquo; The Yeoman Workflow</a>
       
-      
-        <a class="basic-alignment right" href="/blog/blog/25/03/2014/web-components/" title="Next Post: Web Components">Web Components &raquo;</a>
       
     </p>
   </footer>
@@ -242,15 +213,15 @@ yo backbone:view blog
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/blog/25/03/2014/web-components/">Web Components</a>
+        <a href="/blog/25/03/2014/web-components/">Web Components</a>
       </li>
     
       <li class="post">
-        <a href="/blog/blog/24/03/2014/the-yeoman-workflow/">The Yeoman Workflow</a>
+        <a href="/blog/24/03/2014/the-yeoman-workflow/">The Yeoman Workflow</a>
       </li>
     
       <li class="post">
-        <a href="/blog/blog/24/03/2014/yet-another-blog/">Yet Another Blog</a>
+        <a href="/blog/24/03/2014/yet-another-blog/">Yet Another Blog</a>
       </li>
     
   </ul>
@@ -308,8 +279,8 @@ yo backbone:view blog
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.martiplanellas.info/blog/blog/24/03/2014/the-yeoman-workflow/';
-        var disqus_url = 'http://www.martiplanellas.info/blog/blog/24/03/2014/the-yeoman-workflow/';
+        var disqus_identifier = 'http://www.martiplanellas.info/blog/25/03/2014/web-components/';
+        var disqus_url = 'http://www.martiplanellas.info/blog/25/03/2014/web-components/';
         var disqus_script = 'embed.js';
       
     (function () {

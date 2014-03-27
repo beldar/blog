@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Grunt | Transient Obsessions]]></title>
   <link href="http://www.martiplanellas.info/blog/blog/categories/grunt/atom.xml" rel="self"/>
   <link href="http://www.martiplanellas.info/blog/"/>
-  <updated>2014-03-25T17:51:22+00:00</updated>
+  <updated>2014-03-27T17:23:02+00:00</updated>
   <id>http://www.martiplanellas.info/blog/</id>
   <author>
     <name><![CDATA[Martí Planellas]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Yeoman Workflow]]></title>
-    <link href="http://www.martiplanellas.info/blog/blog/24/03/2014/the-yeoman-workflow/"/>
+    <link href="http://www.martiplanellas.info/blog/24/03/2014/the-yeoman-workflow/"/>
     <updated>2014-03-24T14:39:04+00:00</updated>
-    <id>http://www.martiplanellas.info/blog/blog/24/03/2014/the-yeoman-workflow</id>
+    <id>http://www.martiplanellas.info/blog/24/03/2014/the-yeoman-workflow</id>
     <content type="html"><![CDATA[<h2>Searching for tools</h2>
 
 <p>I&rsquo;ve been searching and trying new workflows when starting a front end project/project phase, there are a lot of interesting open source projects for rapid prototyping &lsquo;static&rsquo; websites in a reusable, collaborative, optimised and intelligent way.</p>

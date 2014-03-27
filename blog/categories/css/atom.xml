@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Css | Transient Obsessions]]></title>
   <link href="http://www.martiplanellas.info/blog/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://www.martiplanellas.info/blog/"/>
-  <updated>2014-03-25T17:51:22+00:00</updated>
+  <updated>2014-03-27T17:23:02+00:00</updated>
   <id>http://www.martiplanellas.info/blog/</id>
   <author>
     <name><![CDATA[Martí Planellas]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Web Components]]></title>
-    <link href="http://www.martiplanellas.info/blog/blog/25/03/2014/web-components/"/>
+    <link href="http://www.martiplanellas.info/blog/25/03/2014/web-components/"/>
     <updated>2014-03-25T16:56:32+00:00</updated>
-    <id>http://www.martiplanellas.info/blog/blog/25/03/2014/web-components</id>
+    <id>http://www.martiplanellas.info/blog/25/03/2014/web-components</id>
     <content type="html"><![CDATA[<p>Web Components had become my latest obsession, I read about them a long time ago, but it wasn&rsquo;t until the major players on the web arena embraced them that I really saw them as something I could use today.</p>
 
 <p>When I say major players I mean Mozilla and Google, both of them started writing javascript libraries that provide <a href="http://en.wikipedia.org/wiki/Polyfill">polyfills</a> for the features needed to make web components work today.</p>
@@ -61,9 +61,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Yeoman Workflow]]></title>
-    <link href="http://www.martiplanellas.info/blog/blog/24/03/2014/the-yeoman-workflow/"/>
+    <link href="http://www.martiplanellas.info/blog/24/03/2014/the-yeoman-workflow/"/>
     <updated>2014-03-24T14:39:04+00:00</updated>
-    <id>http://www.martiplanellas.info/blog/blog/24/03/2014/the-yeoman-workflow</id>
+    <id>http://www.martiplanellas.info/blog/24/03/2014/the-yeoman-workflow</id>
     <content type="html"><![CDATA[<h2>Searching for tools</h2>
 
 <p>I&rsquo;ve been searching and trying new workflows when starting a front end project/project phase, there are a lot of interesting open source projects for rapid prototyping &lsquo;static&rsquo; websites in a reusable, collaborative, optimised and intelligent way.</p>
