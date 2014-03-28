@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+    <url>
+        <loc>http://www.martiplanellas.info/blog/24/03/2014/yet-another-blog/</loc>
+        <lastmod>2014-03-25T19:12:18+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.martiplanellas.info/blog/24/03/2014/the-yeoman-workflow/</loc>
+        <lastmod>2014-03-27T19:03:39+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.martiplanellas.info/blog/25/03/2014/how-to-make-a-web-component/</loc>
+        <lastmod>2014-03-27T19:03:39+00:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://www.martiplanellas.info/blog/27/03/2014/making-of-a-web-component-tfl-status/
+        </loc>
+        <lastmod>2014-03-28T19:54:19+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.martiplanellas.info/blog/about/</loc>
+        <lastmod>2014-03-25T19:12:18+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.martiplanellas.info/blog/blog/archives/</loc>
+        <lastmod>2014-03-28T19:54:19+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.martiplanellas.info/blog/</loc>
+        <lastmod>2014-03-28T19:54:19+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://www.martiplanellas.info/blog/robots.txt</loc>
+        <lastmod>2014-03-25T19:12:18+00:00</lastmod>
+    </url>
+</urlset>

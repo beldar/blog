@@ -1,0 +1,565 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>How to Make a Web Component - Transient Obsessions</title>
+  <meta name="author" content="Martí Planellas">
+
+  
+  <meta name="description" content="I choose the display-rss component because it&rsquo;s simple and has most of the use cases you would find in a web component. What the component does &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.martiplanellas.info/blog/27/03/2014/making-of-a-web-component-tfl-status">
+  <link href="/blog/favicon.png" rel="icon">
+  <link href="/blog/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="http://feeds.feedburner.com/TransientObsessions" rel="alternate" title="Transient Obsessions" type="application/atom+xml">
+  <script src="/blog/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/blog/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Lobster+Two|Quicksand:400,700' rel='stylesheet' type='text/css' />
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-49230976-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/blog/">Transient Obsessions</a></h1>
+  
+    <h2>A collection of a web developer ramblings</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/TransientObsessions" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.martiplanellas.info/blog" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/blog/about">About</a></li>
+  <li><a href="/blog/">Blog</a></li>
+  <li><a href="/blog/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">How to Make a Web Component</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-27T17:12:53+00:00" pubdate data-updated="true">Mar 27<span>th</span>, 2014</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://www.martiplanellas.info/blog">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I choose the <a href="https://github.com/beldar/display-rss">display-rss</a>  component because it&rsquo;s simple and has most of the use cases you would find in a web component.</p>
+
+<p>What the component does basically loads any RSS feed and displays it</p>
+
+<h2>Starting up</h2>
+
+<p>We&rsquo;ll be using <a href="http://www.polymer-project.org/">Polymer</a> as the library for the polyfills and creation of the element, and the help of <a href="http://yeoman.io/">Yeoman</a>  the tool I told you about in <a href="http://www.martiplanellas.info/blog/24/03/2014/the-yeoman-workflow/">another post</a>, and you will need to have <a href="http://nodejs.org/">NodeJS</a> installed too.</p>
+
+<p>We&rsquo;ll begin by stalling Yeoman:</p>
+
+<pre><code>npm install -g yo
+</code></pre>
+
+<p>Then we&rsquo;ll install the Polymer Generator</p>
+
+<pre><code>npm install -g generator-polymer
+</code></pre>
+
+<p>Then create a new folder <code>mkdir my-element &amp;&amp; cd $_</code></p>
+
+<p>And start the generator <code>yo polymer</code></p>
+
+<p>This will create the base app structure, and will also install <a href="http://gruntjs.com/">grunt</a> and <a href="http://bower.io/">bower</a>, go make a cup of tea.</p>
+
+<p>Once all dependencies are downloaded we can create our element using:</p>
+
+<pre><code>yo polymer:element my-element
+</code></pre>
+
+<p>This command will ask us if we want to include a constructor, we mark the check, and we also mark that we want to import to our index.html using HTML imports.</p>
+
+<p>Then it will ask if we want to import local elements, we leave blank.</p>
+
+<p>Then it will ask if we want to import installed Bower elements, we are going to write <code>polymer-json</code> since we&rsquo;ll be using it later.</p>
+
+<p>Finally this will create our element in <code>app/elements/my-element.html</code>.</p>
+
+<p>Since we said we wanted the <code>polymer-jsonp</code> element we have to install it: <code>bower install --save Polymer/polymer-jsonp</code></p>
+
+<p>The <code>--save</code> option ensure that this gets added to your bower.json file, if you are asked to choose a suitable version for polymer, I usually choose the one that specifies a version number.</p>
+
+<!-- more -->
+
+
+<h2>Our web component</h2>
+
+<p>So we have our element in <code>app/elements/my-element.html</code>, you should replace every ocurrence of <code>polymer-my-element</code> for simply <code>my-element</code>, this is a bug of the generator that they&rsquo;re going to fix very soon.</p>
+
+<p>Now we have our element and it looks like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;import&quot;</span> <span class="na">href=</span><span class="s">&quot;../bower_components/polymer/polymer.html&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;import&quot;</span> <span class="na">href=</span><span class="s">&quot;../bower_components/polymer-ajax/polymer-jsonp.html&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;polymer</span><span class="na">-element</span> <span class="na">name=</span><span class="s">&quot;my-element&quot;</span>  <span class="na">constructor=</span><span class="s">&quot;MyElementElement&quot;</span> <span class="na">attributes=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;template&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;style&gt;</span>
+</span><span class='line'>      <span class="c">/* styles for the custom element itself - lowest specificity */</span>
+</span><span class='line'>      <span class="nd">:host</span> <span class="p">{</span> <span class="k">display</span><span class="o">:</span> <span class="k">block</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>      <span class="c">/* </span>
+</span><span class='line'><span class="c">      style if an ancestor has the different class</span>
+</span><span class='line'><span class="c">      :host(.different) { } </span>
+</span><span class='line'><span class="c">      */</span>
+</span><span class='line'>    <span class="nt">&lt;/style&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;span&gt;</span>I&#39;m <span class="nt">&lt;b&gt;</span>polymer-myElement<span class="nt">&lt;/b&gt;</span>. This is my Shadow DOM.<span class="nt">&lt;/span&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;polymer</span><span class="na">-ajax</span><span class="nt">&gt;</span><span class="err">&lt;</span>/polymer-ajax&gt;
+</span><span class='line'>  <span class="nt">&lt;/template&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>    <span class="nx">Polymer</span><span class="p">(</span><span class="s1">&#39;my-element&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">//applyAuthorStyles: true,</span>
+</span><span class='line'>      <span class="c1">//resetStyleInheritance: true,</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// element is fully prepared</span>
+</span><span class='line'>      <span class="nx">ready</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span> <span class="p">},</span>
+</span><span class='line'>      <span class="c1">// instance of the element is created</span>
+</span><span class='line'>      <span class="nx">created</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="p">},</span>
+</span><span class='line'>      <span class="c1">// instance was inserted into the document</span>
+</span><span class='line'>      <span class="nx">enteredView</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="p">},</span>
+</span><span class='line'>      <span class="c1">// instance was removed from the document</span>
+</span><span class='line'>      <span class="nx">leftView</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="p">},</span>
+</span><span class='line'>      <span class="c1">// attribute added, removed or updated</span>
+</span><span class='line'>      <span class="nx">attributeChanged</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">attrName</span><span class="p">,</span> <span class="nx">oldVal</span><span class="p">,</span> <span class="nx">newVal</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>  <span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What we see here is the base structure of our web component, the <code>&lt;template&gt;</code> tag you see is what creates the shadow DOM, so everything inside should be encapsulated, we have our style rules, our html and templates and our js.</p>
+
+<h2>Creating the display-rss component</h2>
+
+<p>The first thing we need to do is learn how the <code>&lt;polymer-jsonp&gt;</code> element works, it behaves like the <code>&lt;polymer-ajax&gt;</code> one, you can find the documentation <a href="http://www.polymer-project.org/docs/elements/polymer-elements.html">here</a>.</p>
+
+<p>To be able to get a cross domain feed we can use Google Feed url, which takes a feed url, transforms it to json and give us the result using jsonp.</p>
+
+<p>The idea is that you can make it all work with declarative sintax, so we&rsquo;ll configure it like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;polymer</span><span class="na">-jsonp</span>  <span class="na">id=</span><span class="s">&quot;feed_data&quot;</span>
+</span><span class='line'>                    <span class="na">url=</span><span class="s">&quot;http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&amp;num={{entries}}&amp;q={{url}}&amp;callback=&quot;</span>
+</span><span class='line'>                    <span class="na">auto=</span><span class="s">&quot;true&quot;</span>
+</span><span class='line'>                    <span class="na">response=</span><span class="s">&quot;{{data}}&quot;</span>
+</span><span class='line'>                    <span class="na">on-polymer-response=</span><span class="s">&quot;{{responseHandler}}&quot;</span><span class="nt">&gt;</span><span class="err">&lt;</span>/polymer-jsonp&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To understand this code we need some notions of how data-binding works in Polymer, take a quick read at <a href="http://www.polymer-project.org/docs/polymer/databinding.html">this article</a>.</p>
+
+<p>In the code we are saying that this element has the id <em>feed_data</em> the <code>{{url}}</code> means its data-binded to the variable <em>data</em>  and <code>{{entries}}</code> with the <em>entries</em> variable, fires up automatically, puts the response on the <em>data</em> variable, and on-response calls the <em>responseHandler</em> function.</p>
+
+<p>We also going to define the <em>url</em> and <em>entries</em> variables in the attributes so can be changed from outside: <code>attributes="url entries"</code></p>
+
+<p>Then we modify the Polymer function to reflect those variables and functions:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Polymer</span><span class="p">(</span><span class="s1">&#39;my-element&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;http://feeds.bbci.co.uk/news/england/rss.xml&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">entries</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">data</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+</span><span class='line'>  <span class="c1">// element is fully prepared</span>
+</span><span class='line'>  <span class="nx">ready</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span> <span class="p">},</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">responseHandler</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ok lets try if this works, before go to the <code>app/index.html</code> and change <code>&lt;polymer-my-element&gt;&lt;/polymer-my-element&gt;</code> for <code>&lt;my-element&gt;&lt;/my-element&gt;</code>, and lets fire up the server, run this in the root of your project:</p>
+
+<pre><code>grunt serve
+</code></pre>
+
+<p>This command should prepare everything, and pop up a browser with the website running, if we take at the console in our dev tools we should see an object containing our feed.</p>
+
+<p>Now is the time to display this data, we&rsquo;ll show the feed title, the last time it was updated and we&rsquo;ll loop through the entries using templates:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">&quot;feed_title&quot;</span><span class="nt">&gt;</span>{{feed.title}}<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;small&gt;</span>Last updated: {{lastUpdated}}<span class="nt">&lt;/small&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;entries&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;template</span> <span class="na">repeat=</span><span class="s">&quot;{{entry in feed.entries}}&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;li&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{entry.link}}&quot;</span> <span class="na">target=</span><span class="s">&quot;_blank&quot;</span> <span class="na">class=</span><span class="s">&quot;entry_title&quot;</span><span class="nt">&gt;</span>{{entry.title}}<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;small</span> <span class="na">class=</span><span class="s">&quot;entry_published&quot;</span><span class="nt">&gt;</span>{{entry.publishedDate}}<span class="nt">&lt;/small&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;p&gt;</span>{{entry.contentSnippet}}<span class="nt">&lt;/p&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/template&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We also can refresh the feed every X milliseconds, the whole thing looks like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Polymer</span><span class="p">(</span><span class="s1">&#39;my-element&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">//applyAuthorStyles: true,</span>
+</span><span class='line'>  <span class="c1">//resetStyleInheritance: true,</span>
+</span><span class='line'>  <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;http://feeds.bbci.co.uk/news/england/rss.xml&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">entries</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">refresh</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
+</span><span class='line'>  <span class="nx">lastUpdated</span><span class="o">:</span> <span class="s1">&#39;Not updated yet&#39;</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">ready</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">refresh</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>              <span class="nx">that</span><span class="p">.</span><span class="nx">$</span><span class="p">.</span><span class="nx">feed_data</span><span class="p">.</span><span class="nx">go</span><span class="p">();</span>
+</span><span class='line'>          <span class="p">},</span> <span class="k">this</span><span class="p">.</span><span class="nx">refresh</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">responseHandler</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">responseStatus</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">lastUpdated</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
+</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">feed</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">responseData</span><span class="p">.</span><span class="nx">feed</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'> <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The code is pretty self explanatory, the only curious line is perhaps line 13 where we select by id directly using <code>this.$.feed_data</code>  <em>feed_data</em> is the id of our <em>polymer-jsonp</em> element that has a js API called <code>go()</code> to fire up the ajax call.</p>
+
+<p>And that&rsquo;s it! Is <strong>that</strong> easy!We now have a functional custom element that we can configure via attributes like this:</p>
+
+<pre><code>&lt;my-element url="http://rss.news.yahoo.com/rss/topstories" entries="20" refresh="10000"&gt;&lt;/my-element&gt;
+</code></pre>
+
+<p>Fire up your <code>grunt serve</code> and you should see a news feed.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Martí Planellas</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-27T17:12:53+00:00" pubdate data-updated="true">Mar 27<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/blog/categories/css/'>css</a>, <a class='category' href='/blog/blog/categories/html5/'>html5</a>, <a class='category' href='/blog/blog/categories/js/'>js</a>, <a class='category' href='/blog/blog/categories/polymer/'>polymer</a>, <a class='category' href='/blog/blog/categories/tutorial/'>tutorial</a>, <a class='category' href='/blog/blog/categories/web-components/'>web components</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.martiplanellas.info/blog/27/03/2014/making-of-a-web-component-tfl-status/" data-via="beldar" data-counturl="http://www.martiplanellas.info/blog/27/03/2014/making-of-a-web-component-tfl-status/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/25/03/2014/how-to-make-a-web-component/" title="Previous Post: Web Components">&laquo; Web Components</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/27/03/2014/making-of-a-web-component-tfl-status/">How to Make a Web Component</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/25/03/2014/how-to-make-a-web-component/">Web Components</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/24/03/2014/the-yeoman-workflow/">The Yeoman Workflow</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/24/03/2014/yet-another-blog/">Yet Another Blog</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/beldar">@beldar</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'beldar',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/blog/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Martí Planellas -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'TransientObsessions';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.martiplanellas.info/blog/27/03/2014/making-of-a-web-component-tfl-status/';
+        var disqus_url = 'http://www.martiplanellas.info/blog/27/03/2014/making-of-a-web-component-tfl-status/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

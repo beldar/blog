@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Js | Transient Obsessions]]></title>
+  <link href="http://www.martiplanellas.info/blog/blog/categories/js/atom.xml" rel="self"/>
+  <link href="http://www.martiplanellas.info/blog/"/>
+  <updated>2014-03-28T19:55:14+00:00</updated>
+  <id>http://www.martiplanellas.info/blog/</id>
+  <author>
+    <name><![CDATA[Martí Planellas]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Make a Web Component]]></title>
+    <link href="http://www.martiplanellas.info/blog/27/03/2014/making-of-a-web-component-tfl-status/"/>
+    <updated>2014-03-27T17:12:53+00:00</updated>
+    <id>http://www.martiplanellas.info/blog/27/03/2014/making-of-a-web-component-tfl-status</id>
+    <content type="html"><![CDATA[<p>I choose the <a href="https://github.com/beldar/display-rss">display-rss</a>  component because it&rsquo;s simple and has most of the use cases you would find in a web component.</p>
+
+<p>What the component does basically loads any RSS feed and displays it</p>
+
+<h2>Starting up</h2>
+
+<p>We&rsquo;ll be using <a href="http://www.polymer-project.org/">Polymer</a> as the library for the polyfills and creation of the element, and the help of <a href="http://yeoman.io/">Yeoman</a>  the tool I told you about in <a href="http://www.martiplanellas.info/blog/24/03/2014/the-yeoman-workflow/">another post</a>, and you will need to have <a href="http://nodejs.org/">NodeJS</a> installed too.</p>
+
+<p>We&rsquo;ll begin by stalling Yeoman:</p>
+
+<pre><code>npm install -g yo
+</code></pre>
+
+<p>Then we&rsquo;ll install the Polymer Generator</p>
+
+<pre><code>npm install -g generator-polymer
+</code></pre>
+
+<p>Then create a new folder <code>mkdir my-element &amp;&amp; cd $_</code></p>
+
+<p>And start the generator <code>yo polymer</code></p>
+
+<p>This will create the base app structure, and will also install <a href="http://gruntjs.com/">grunt</a> and <a href="http://bower.io/">bower</a>, go make a cup of tea.</p>
+
+<p>Once all dependencies are downloaded we can create our element using:</p>
+
+<pre><code>yo polymer:element my-element
+</code></pre>
+
+<p>This command will ask us if we want to include a constructor, we mark the check, and we also mark that we want to import to our index.html using HTML imports.</p>
+
+<p>Then it will ask if we want to import local elements, we leave blank.</p>
+
+<p>Then it will ask if we want to import installed Bower elements, we are going to write <code>polymer-json</code> since we&rsquo;ll be using it later.</p>
+
+<p>Finally this will create our element in <code>app/elements/my-element.html</code>.</p>
+
+<p>Since we said we wanted the <code>polymer-jsonp</code> element we have to install it: <code>bower install --save Polymer/polymer-jsonp</code></p>
+
+<p>The <code>--save</code> option ensure that this gets added to your bower.json file, if you are asked to choose a suitable version for polymer, I usually choose the one that specifies a version number.</p>
+
+<!-- more -->
+
+
+<h2>Our web component</h2>
+
+<p>So we have our element in <code>app/elements/my-element.html</code>, you should replace every ocurrence of <code>polymer-my-element</code> for simply <code>my-element</code>, this is a bug of the generator that they&rsquo;re going to fix very soon.</p>
+
+<p>Now we have our element and it looks like this:</p>
+
+<p>``` html
+<link rel="import" href="../bower_components/polymer/polymer.html"></p>
+
+<p><link rel="import" href="../bower_components/polymer-ajax/polymer-jsonp.html">
+&lt;polymer-element name=&ldquo;my-element&rdquo;  constructor=&ldquo;MyElementElement&rdquo; attributes=&ldquo;&rdquo;>
+  <template></p>
+
+<pre><code>&lt;style&gt;
+  /* styles for the custom element itself - lowest specificity */
+  :host { display: block; }
+  /* 
+  style if an ancestor has the different class
+  :host(.different) { } 
+  */
+&lt;/style&gt;
+&lt;span&gt;I'm &lt;b&gt;polymer-myElement&lt;/b&gt;. This is my Shadow DOM.&lt;/span&gt;
+    &lt;polymer-ajax&gt;&lt;/polymer-ajax&gt;
+</code></pre>
+
+<p>  </template>
+  <script></p>
+
+<pre><code>Polymer('my-element', {
+  //applyAuthorStyles: true,
+  //resetStyleInheritance: true,
+
+  // element is fully prepared
+  ready: function(){ },
+  // instance of the element is created
+  created: function() { },
+  // instance was inserted into the document
+  enteredView: function() { },
+  // instance was removed from the document
+  leftView: function() { },
+  // attribute added, removed or updated
+  attributeChanged: function(attrName, oldVal, newVal) { }
+});
+</code></pre>
+
+<p>  </script>
+<code>``What we see here is the base structure of our web component, the</code><template>` tag you see is what creates the shadow DOM, so everything inside should be encapsulated, we have our style rules, our html and templates and our js.</p>
+
+<h2>Creating the display-rss component</h2>
+
+<p>The first thing we need to do is learn how the <code>&lt;polymer-jsonp&gt;</code> element works, it behaves like the <code>&lt;polymer-ajax&gt;</code> one, you can find the documentation <a href="http://www.polymer-project.org/docs/elements/polymer-elements.html">here</a>.</p>
+
+<p>To be able to get a cross domain feed we can use Google Feed url, which takes a feed url, transforms it to json and give us the result using jsonp.</p>
+
+<p>The idea is that you can make it all work with declarative sintax, so we&rsquo;ll configure it like this:</p>
+
+<p>
+``` html
+&lt;polymer-jsonp  id=&ldquo;feed_data&rdquo;</p>
+
+<pre><code>                url="http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&amp;num={{entries}}&amp;q={{url}}&amp;callback="
+                auto="true"
+                response="{{data}}"
+                on-polymer-response="{{responseHandler}}"&gt;&lt;/polymer-jsonp&gt;
+</code></pre>
+
+<p>```
+
+To understand this code we need some notions of how data-binding works in Polymer, take a quick read at <a href="http://www.polymer-project.org/docs/polymer/databinding.html">this article</a>.</p>
+
+<p>In the code we are saying that this element has the id <em>feed_data</em> the <code>{{url}}</code> means its data-binded to the variable <em>data</em>  and <code>{{entries}}</code> with the <em>entries</em> variable, fires up automatically, puts the response on the <em>data</em> variable, and on-response calls the <em>responseHandler</em> function.</p>
+
+<p>We also going to define the <em>url</em> and <em>entries</em> variables in the attributes so can be changed from outside: <code>attributes="url entries"</code></p>
+
+<p>Then we modify the Polymer function to reflect those variables and functions:</p>
+
+<p>``` js</p>
+
+<pre><code>Polymer('my-element', {
+  url: 'http://feeds.bbci.co.uk/news/england/rss.xml',
+  entries: 10,
+  data: null,
+  // element is fully prepared
+  ready: function(){ },
+
+  responseHandler: function(){
+    console.log(this.data);
+  }
+});
+</code></pre>
+
+<p>```</p>
+
+<p>Ok lets try if this works, before go to the <code>app/index.html</code> and change <code>&lt;polymer-my-element&gt;&lt;/polymer-my-element&gt;</code> for <code>&lt;my-element&gt;&lt;/my-element&gt;</code>, and lets fire up the server, run this in the root of your project:</p>
+
+<pre><code>grunt serve
+</code></pre>
+
+<p>This command should prepare everything, and pop up a browser with the website running, if we take at the console in our dev tools we should see an object containing our feed.</p>
+
+<p>Now is the time to display this data, we&rsquo;ll show the feed title, the last time it was updated and we&rsquo;ll loop through the entries using templates:</p>
+
+<p>
+``` html</p>
+
+<pre><code>&lt;div class="container"&gt;
+    &lt;h1 class="feed_title"&gt;{{feed.title}}&lt;/h1&gt;
+    &lt;small&gt;Last updated: {{lastUpdated}}&lt;/small&gt;
+    &lt;ul class="entries"&gt;
+    &lt;template repeat="{{entry in feed.entries}}"&gt;
+        &lt;li&gt;
+            &lt;a href="{{entry.link}}" target="_blank" class="entry_title"&gt;{{entry.title}}&lt;/a&gt;
+            &lt;small class="entry_published"&gt;{{entry.publishedDate}}&lt;/small&gt;
+            &lt;p&gt;{{entry.contentSnippet}}&lt;/p&gt;
+        &lt;/li&gt;
+    &lt;/template&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>```
+
+We also can refresh the feed every X milliseconds, the whole thing looks like this:</p>
+
+<p>``` js</p>
+
+<pre><code>Polymer('my-element', {
+  //applyAuthorStyles: true,
+  //resetStyleInheritance: true,
+  url: 'http://feeds.bbci.co.uk/news/england/rss.xml',
+  entries: 10,
+  refresh: 1000,
+  lastUpdated: 'Not updated yet',
+
+  ready: function() {
+      var that = this;
+      if (this.refresh) {
+          setInterval(function(){
+              that.$.feed_data.go();
+          }, this.refresh);
+      }
+  },
+
+  responseHandler: function() {
+    if (this.data.responseStatus === 200) {
+        this.lastUpdated = new Date()
+        this.feed = this.data.responseData.feed;
+    }
+  }     
+</code></pre>
+
+<p> });
+<code>``
+The code is pretty self explanatory, the only curious line is perhaps line 13 where we select by id directly using</code>this.$.feed_data<code> _feed_data_ is the id of our _polymer-jsonp_ element that has a js API called</code>go()` to fire up the ajax call.</p>
+
+<p>And that&rsquo;s it! Is <strong>that</strong> easy!We now have a functional custom element that we can configure via attributes like this:</p>
+
+<pre><code>&lt;my-element url="http://rss.news.yahoo.com/rss/topstories" entries="20" refresh="10000"&gt;&lt;/my-element&gt;
+</code></pre>
+
+<p>Fire up your <code>grunt serve</code> and you should see a news feed.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Web Components]]></title>
+    <link href="http://www.martiplanellas.info/blog/25/03/2014/how-to-make-a-web-component/"/>
+    <updated>2014-03-25T16:56:32+00:00</updated>
+    <id>http://www.martiplanellas.info/blog/25/03/2014/how-to-make-a-web-component</id>
+    <content type="html"><![CDATA[<p>Web Components had become my latest obsession, I read about them a long time ago, but it wasn&rsquo;t until the major players on the web arena embraced them that I really saw them as something I could use today.</p>
+
+<p>When I say major players I mean Mozilla and Google, both of them started writing javascript libraries that provide <a href="http://en.wikipedia.org/wiki/Polyfill">polyfills</a> for the features needed to make web components work today.</p>
+
+<!-- more -->
+
+
+<p>Ok, but what are web components? In words of Zeno Rocha, project lead of <a href="http://customelements.io/">customelements.io</a>:</p>
+
+<blockquote><p>Web Components are a collection of standards which are working their way through the W3C. They enable truly encapsulated and reusable components for the web. And if you think HTML5 changed the web, wait to see what Web Components will do.</p></blockquote>
+
+<p>Those standards working their way through the future are:</p>
+
+<ul>
+<li><strong>Custom Elements</strong>: Enables authors to define and use new types of DOM elements in a document.</li>
+<li><strong>Shadow DOM</strong>: Shadow DOM is designed to provide encapsulation by hiding DOM subtrees under shadow roots. It provides a method of establishing and maintaining functional boundaries between DOM trees and how these trees interact with each other within a document, thus enabling better functional encapsulation within the DOM.</li>
+<li><strong>HTML Imports</strong>: HTML Imports are a way to include and reuse HTML documents in other HTML documents.</li>
+</ul>
+
+
+<p>These are the foundation of web components.</p>
+
+<p>Mozilla is developing <a href="http://www.x-tags.org/">x-tags</a> library and Google is developing the <a href="http://www.polymer-project.org/">Polymer</a> library, both of them have their own way of declaring the component and the interface, but the end result is the same:</p>
+
+<pre><code>&lt;some-component&gt;&lt;/some-component&gt;
+</code></pre>
+
+<p>A new element that has an encapsulated structure, style and functionality; it&rsquo;s highly reusable, and customisable through attributes and maybe a javascript API.</p>
+
+<p>In <a href="http://customelements.io/">customelements.io</a> you can find a directory of web components ready to use, most of them also can be installed via bower, and they&rsquo;re really fun to use.</p>
+
+<p>I&rsquo;ve created three web components so far:</p>
+
+<ul>
+<li><a href="https://github.com/beldar/boris-bikes">boris-bikes</a>: It provides a component that fetches the <a href="http://www.tfl.gov.uk/modes/cycling/barclays-cycle-hire">Boris Bike</a> data (free bikes, free docks, etc) and provides and interface for it, getting your location and showing the bikes location on a map (which is another web component).</li>
+<li><a href="https://github.com/beldar/tfl-status">tfl-status</a>: It provides a component that fetches the Tube Status updates and shows the line status in real time.</li>
+<li><a href="https://github.com/beldar/display-rss">display-rss</a>: Displays any RSS feed that you put on the <em>url</em> attribute</li>
+</ul>
+
+
+<p>In a future post I&rsquo;ll explain how I did it, what challenges did I face and some advises too.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Yeoman Workflow]]></title>
+    <link href="http://www.martiplanellas.info/blog/24/03/2014/the-yeoman-workflow/"/>
+    <updated>2014-03-24T14:39:04+00:00</updated>
+    <id>http://www.martiplanellas.info/blog/24/03/2014/the-yeoman-workflow</id>
+    <content type="html"><![CDATA[<h2>Searching for tools</h2>
+
+<p>I&rsquo;ve been searching and trying new workflows when starting a front end project/project phase, there are a lot of interesting open source projects for rapid prototyping &lsquo;static&rsquo; websites in a reusable, collaborative, optimised and intelligent way.</p>
+
+<p>I&rsquo;ve been trying tools like:</p>
+
+<ul>
+<li><a href="http://gruntjs.com/">Grunt</a> for automating build tasks like optimising images, minifying and uglifying javascript, css and html.</li>
+<li><a href="http://bower.io/">Bower</a> a package manager for the web (meaning front end).</li>
+<li><a href="http://compass-style.org/">Compass</a> I know it can do a lot of things but I&rsquo;m using it only to compile <a href="http://sass-lang.com/">Sass</a> files.</li>
+</ul>
+
+
+<p>But it wasn&rsquo;t until I found <a href="http://yeoman.io/">Yeoman</a> that everything came toghether.</p>
+
+<p>It&rsquo;s a tool that scaffolds, downloads and prepares all these tools for you doing the tedious configuration part and using best practices approach in all parts.</p>
+
+<!-- more -->
+
+
+<h2>Instalation</h2>
+
+<p> If you have node already you just have to run:</p>
+
+<pre><code>npm install -g yo
+</code></pre>
+
+<p>Yeoman has lots of generators which basically are different scaffold variations using different libraries and components depending on which tools you need for the project.</p>
+
+<p>The basic one is called <a href="https://github.com/yeoman/generator-webapp">generator-webapp</a> you can install it running:</p>
+
+<pre><code>npm install -g generator-webapp
+</code></pre>
+
+<p>An then create a new project like this:</p>
+
+<pre><code>yo webapp
+</code></pre>
+
+<p>It will ask you if you if you want some additional things:</p>
+
+<p><img src="https://camo.githubusercontent.com/5f126a73cb4f0a16ca7b9e9c7b748a099458089b/687474703a2f2f692e696d6775722e636f6d2f754b545432486a2e706e67" alt="webapp-generator" /></p>
+
+<p>And BOOM, you have a project structure ready to build using grunt, you can create a web server on the fly running <code>grunt serve</code> or build the project into the <code>/dist</code> folder running <code>grunt build</code>.</p>
+
+<p>Then you can use bower to install other js libraries you need like:</p>
+
+<pre><code>bower install --save underscore
+</code></pre>
+
+<p>The <code>--save</code> parameter ensures that the new library is saved on the <code>bower.json</code> file.</p>
+
+<p>All your bower dependencies will end up in the <code>bower_components</code> folder which is not version controlled, when you want to install it somewhere else you&rsquo;ll run <code>bower install</code> inside and it will download all the libraries you need, just as <a href="https://getcomposer.org/">Composer</a> does for the back end.</p>
+
+<h2>Using other generators</h2>
+
+<p>That&rsquo;s one way of doing it, another way is to use other generators that are more specific to what you&rsquo;ll use in your project, for example I usually use <a href="http://backbonejs.org/">Backbone.js</a> in my projects, I could install it via bower, or I could use the <a href="https://github.com/yeoman/generator-backbone">generator-backbone</a>, which also gives me other interesting tools when building my app like generate models, collections, routers or views:</p>
+
+<pre><code>yo backbone # generates your application base and build workflow
+yo backbone:model blog
+yo backbone:collection blog
+yo backbone:router blog
+yo backbone:view blog
+</code></pre>
+
+<p>There&rsquo;s a very thorough and extensive post about how to use it in <a href="http://code.tutsplus.com/tutorials/building-apps-with-the-yeoman-workflow--net-33254">NetTuts</a></p>
+
+<p>There&rsquo;re quite a few <a href="http://yeoman.io/official-generators.html">official generators</a> and tons of <a href="http://yeoman.io/community-generators.html">community generators</a>, you can even <a href="http://yeoman.io/generators.html#writing-your-first-generator">write your own</a> with your own specifications.</p>
+]]></content>
+  </entry>
+  
+</feed>
