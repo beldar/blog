@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tutorial | Transient Obsessions]]></title>
   <link href="http://www.martiplanellas.info/blog/blog/categories/tutorial/atom.xml" rel="self"/>
   <link href="http://www.martiplanellas.info/blog/"/>
-  <updated>2014-03-28T19:55:14+00:00</updated>
+  <updated>2014-03-28T19:58:50+00:00</updated>
   <id>http://www.martiplanellas.info/blog/</id>
   <author>
     <name><![CDATA[Martí Planellas]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[How to Make a Web Component]]></title>
-    <link href="http://www.martiplanellas.info/blog/27/03/2014/making-of-a-web-component-tfl-status/"/>
+    <link href="http://www.martiplanellas.info/blog/27/03/2014/how-to-make-a-web-component/"/>
     <updated>2014-03-27T17:12:53+00:00</updated>
-    <id>http://www.martiplanellas.info/blog/27/03/2014/making-of-a-web-component-tfl-status</id>
+    <id>http://www.martiplanellas.info/blog/27/03/2014/how-to-make-a-web-component</id>
     <content type="html"><![CDATA[<p>I choose the <a href="https://github.com/beldar/display-rss">display-rss</a>  component because it&rsquo;s simple and has most of the use cases you would find in a web component.</p>
 
 <p>What the component does basically loads any RSS feed and displays it</p>

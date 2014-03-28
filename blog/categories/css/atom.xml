@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Css | Transient Obsessions]]></title>
   <link href="http://www.martiplanellas.info/blog/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://www.martiplanellas.info/blog/"/>
-  <updated>2014-03-28T19:55:14+00:00</updated>
+  <updated>2014-03-28T19:58:50+00:00</updated>
   <id>http://www.martiplanellas.info/blog/</id>
   <author>
     <name><![CDATA[Martí Planellas]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[How to Make a Web Component]]></title>
-    <link href="http://www.martiplanellas.info/blog/27/03/2014/making-of-a-web-component-tfl-status/"/>
+    <link href="http://www.martiplanellas.info/blog/27/03/2014/how-to-make-a-web-component/"/>
     <updated>2014-03-27T17:12:53+00:00</updated>
-    <id>http://www.martiplanellas.info/blog/27/03/2014/making-of-a-web-component-tfl-status</id>
+    <id>http://www.martiplanellas.info/blog/27/03/2014/how-to-make-a-web-component</id>
     <content type="html"><![CDATA[<p>I choose the <a href="https://github.com/beldar/display-rss">display-rss</a>  component because it&rsquo;s simple and has most of the use cases you would find in a web component.</p>
 
 <p>What the component does basically loads any RSS feed and displays it</p>
@@ -228,9 +228,9 @@ The code is pretty self explanatory, the only curious line is perhaps line 13 wh
   
   <entry>
     <title type="html"><![CDATA[Web Components]]></title>
-    <link href="http://www.martiplanellas.info/blog/25/03/2014/how-to-make-a-web-component/"/>
+    <link href="http://www.martiplanellas.info/blog/25/03/2014/web-components/"/>
     <updated>2014-03-25T16:56:32+00:00</updated>
-    <id>http://www.martiplanellas.info/blog/25/03/2014/how-to-make-a-web-component</id>
+    <id>http://www.martiplanellas.info/blog/25/03/2014/web-components</id>
     <content type="html"><![CDATA[<p>Web Components had become my latest obsession, I read about them a long time ago, but it wasn&rsquo;t until the major players on the web arena embraced them that I really saw them as something I could use today.</p>
 
 <p>When I say major players I mean Mozilla and Google, both of them started writing javascript libraries that provide <a href="http://en.wikipedia.org/wiki/Polyfill">polyfills</a> for the features needed to make web components work today.</p>
